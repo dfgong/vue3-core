@@ -11,6 +11,9 @@ if (__DEV__) {
   initDev()
 }
 
+// dfgong Record一个泛型类型，用于表示一个由指定类型的属性组成的对象
+// dfgong 下面的compileCache类型为属性类型为string，值类型为RenderFunction的对象
+// dfgong ts 提供了一类这种功能类型 https://www.typescriptlang.org/docs/handbook/utility-types.html#readonlytype
 const compileCache: Record<string, RenderFunction> = Object.create(null)
 
 function compileToFunction(
@@ -26,12 +29,14 @@ function compileToFunction(
     }
   }
 
+  // dfgong map缓存
   const key = template
   const cached = compileCache[key]
   if (cached) {
     return cached
   }
 
+  // dfgong 只支持ID选择器？
   if (template[0] === '#') {
     const el = document.querySelector(template)
     if (__DEV__ && !el) {
@@ -53,6 +58,7 @@ function compileToFunction(
     options
   )
 
+  // dfgong 自定义element https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/get
   if (!opts.isCustomElement && typeof customElements !== 'undefined') {
     opts.isCustomElement = tag => !!customElements.get(tag)
   }
@@ -84,6 +90,7 @@ function compileToFunction(
   // mark the function as runtime compiled
   ;(render as InternalRenderFunction)._rc = true
 
+  // dfgong 加入map缓存并返回
   return (compileCache[key] = render)
 }
 

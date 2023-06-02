@@ -44,6 +44,8 @@ export const isRegExp = (val: unknown): val is RegExp =>
   toTypeString(val) === '[object RegExp]'
 export const isFunction = (val: unknown): val is Function =>
   typeof val === 'function'
+
+// dfgong 这里的val is string是一个类型谓词，它用于告诉TypeScript编译器，如果isString函数返回true，那么value的类型应该被推断为字符串类型 - 避免了使用as
 export const isString = (val: unknown): val is string => typeof val === 'string'
 export const isSymbol = (val: unknown): val is symbol => typeof val === 'symbol'
 export const isObject = (val: unknown): val is Record<any, any> =>
