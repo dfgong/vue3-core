@@ -224,6 +224,8 @@ export interface VNode<
   ce?: (instance: ComponentInternalInstance) => void
 }
 
+// dfgong 前面是类型定义，后面是功能实现，类型定义和功能实现不用分开在不同文件，比如vnode按大功能放在一起就行
+
 // Since v-if and v-for are the two possible ways node structure can dynamically
 // change, once we consider v-if branches and each v-for fragment a block, we
 // can divide a template into nested blocks, and within each block the node

@@ -1,3 +1,5 @@
+// dfgong 自定义一些通用的type utils
+
 export type Prettify<T> = { [K in keyof T]: T[K] } & {}
 
 export type UnionToIntersection<U> = (

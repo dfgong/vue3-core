@@ -26,7 +26,7 @@ export const enum CompilerDeprecationTypes {
 }
 
 type DeprecationData = {
-  message: string | ((...args: any[]) => string)
+  message: string | ((...args: any[]) => string) // dfgong 有些地方也是可以用any的
   link?: string
 }
 

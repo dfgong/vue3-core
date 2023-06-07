@@ -20,6 +20,7 @@ function compileToFunction(
   template: string | HTMLElement,
   options?: CompilerOptions
 ): RenderFunction {
+  // dfgong 接受的是dom元素
   if (!isString(template)) {
     if (template.nodeType) {
       template = template.innerHTML
@@ -36,7 +37,7 @@ function compileToFunction(
     return cached
   }
 
-  // dfgong 只支持ID选择器？
+  // dfgong css选择器只支持ID
   if (template[0] === '#') {
     const el = document.querySelector(template)
     if (__DEV__ && !el) {
@@ -63,6 +64,7 @@ function compileToFunction(
     opts.isCustomElement = tag => !!customElements.get(tag)
   }
 
+  // dfgong compile函数生成render函数的字符串序列号code
   const { code } = compile(template, opts)
 
   function onError(err: CompilerError, asWarning = false) {
@@ -83,6 +85,8 @@ function compileToFunction(
   // with keys that cannot be mangled, and can be quite heavy size-wise.
   // In the global build we know `Vue` is available globally so we can avoid
   // the wildcard object.
+
+  // dfgong code转函数 new Function https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/Function
   const render = (
     __GLOBAL__ ? new Function(code)() : new Function('Vue', code)(runtimeDom)
   ) as RenderFunction

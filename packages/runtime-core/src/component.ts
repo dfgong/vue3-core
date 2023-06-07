@@ -822,6 +822,7 @@ export function registerRuntimeCompiler(_compile: any) {
   compile = _compile
   installWithProxy = i => {
     // dfgong !表示该属性是非空断言
+    // dfgong 有_rc标记表示已经将模板编译成了render函数
     if (i.render!._rc) {
       i.withProxy = new Proxy(i.ctx, RuntimeCompiledPublicInstanceProxyHandlers)
     }

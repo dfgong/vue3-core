@@ -85,6 +85,7 @@ export function normalizeClass(value: unknown): string {
 
 export function normalizeProps(props: Record<string, any> | null) {
   if (!props) return null
+  // dfgong class,style单独处理 - 因为用户可以使用多种格式使用
   let { class: klass, style } = props
   if (klass && !isString(klass)) {
     props.class = normalizeClass(klass)

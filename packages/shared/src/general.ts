@@ -183,3 +183,5 @@ export function genPropsAccessExp(name: string) {
     ? `__props.${name}`
     : `__props[${JSON.stringify(name)}]`
 }
+
+// dfgong 内容建议是按功能来组织，相同功能的函数、变量放一起，不要分的太细（比如一个方法一个文件），也不要全部放一起
